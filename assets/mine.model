@@ -1,0 +1,27 @@
+# Made using Asset Forge (2.2.0)
+
+:materials
+
+[name:_defaultMat;color:RGBA(0.939, 0.953, 1.000, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0.25;]
+[name:dark;color:RGBA(0.007, 0.042, 0.170, 1.000);scale:(1.0, 1.0);texture:Metal/circuit.png;shader:Default;valueA:0.5;valueB:0.4;]
+[name:wood;color:RGBA(0.011, 0.069, 0.179, 1.000);scale:(1.0, 1.0);shader:Default;valueA:0.35;valueB:0;]
+[name:metalLight;color:RGBA(0.000, 0.000, 0.000, 1.000);scale:(1.0, 1.0);texture:Metal/metalPlate.png;shader:Default;valueA:0.35;valueB:0.25;]
+
+:models
+
+[name:;collection:Primitives;type:cylinder;position:(0.2193, 0.7033, -0.0534);rotation:(0.0000, 30.0000, 330.0000);scale:(0.0811, 0.4544, 0.0787);group:Group_10;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:cylinder;position:(0.1920, 0.7672, 0.1457);rotation:(9.8466, 332.4952, 331.5187);scale:(0.0811, 0.4544, 0.0787);group:Group_12;locked:False;hidden:False;materials:dark;]
+[name:;collection:Greebles;type:detail_ventRound;position:(0.2344, 0.8711, 0.1881);rotation:(9.8466, 332.4952, 331.5187);scale:(0.7000, 0.6000, 0.7000);group:Group_12;locked:False;hidden:False;materials:dark+dark;]
+[name:;collection:Primitives;type:sphere_half;position:(0.4141, 1.0930, -0.1659);rotation:(0.0000, 30.0000, 330.0000);scale:(0.0811, 0.1337, 0.0787);group:Group_10;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:sphere_half;position:(0.3511, 1.1569, 0.3048);rotation:(9.8466, 332.4952, 331.5187);scale:(0.0811, 0.1337, 0.0787);group:Group_12;locked:False;hidden:False;materials:dark;]
+[name:;collection:Greebles;type:detail_ventRound;position:(-0.0564, 0.9134, 0.2630);rotation:(16.6400, 273.6475, 332.8915);scale:(0.7000, 0.6000, 0.7000);group:Group_7;locked:False;hidden:False;materials:dark+dark;]
+[name:;collection:Primitives;type:cylinder;position:(-0.1408, 0.7926, 0.0000);rotation:(0.0000, 0.0000, 30.0000);scale:(0.0811, 0.4544, 0.0787);group:Group_11;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:cylinder;position:(0.0000, 0.7488, -0.1739);rotation:(330.0000, 0.0000, 0.0000);scale:(0.0811, 0.4544, 0.0787);group:Group_5;locked:False;hidden:False;materials:dark;]
+[name:;collection:Greebles;type:detail_ventRound;position:(0.0000, 0.8960, -0.2589);rotation:(330.0000, 0.0000, 0.0000);scale:(0.7000, 0.6001, 0.7000);group:Group_5;locked:False;hidden:False;materials:dark+dark;]
+[name:;collection:Primitives;type:sphere_half;position:(0.0000, 1.1385, -0.3989);rotation:(330.0000, 0.0000, 0.0000);scale:(0.0811, 0.1337, 0.0787);group:Group_5;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:cylinder;position:(-0.0181, 0.7685, 0.1829);rotation:(16.6400, 273.6475, 332.8915);scale:(0.0811, 0.4544, 0.0787);group:Group_7;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:sphere_half;position:(-0.1195, 1.1523, 0.3949);rotation:(16.6400, 273.6475, 332.8915);scale:(0.0811, 0.1337, 0.0787);group:Group_7;locked:False;hidden:False;materials:dark;]
+[name:;collection:Greebles;type:detail_ventRound;position:(0.2929, 0.8505, -0.0959);rotation:(0.0000, 30.0000, 330.0000);scale:(0.7001, 0.6000, 0.7000);group:Group_10;locked:False;hidden:False;materials:dark+dark;]
+[name:;collection:Greebles;type:detail_ventRound;position:(-0.2158, 0.9225, 0.0000);rotation:(0.0000, 0.0000, 30.0000);scale:(0.7000, 0.6000, 0.7000);group:Group_11;locked:False;hidden:False;materials:dark+dark;]
+[name:;collection:Primitives;type:sphere_half;position:(-0.3658, 1.1823, 0.0000);rotation:(0.0000, 0.0000, 30.0000);scale:(0.0811, 0.1337, 0.0787);group:;locked:False;hidden:False;materials:dark;]
+[name:;collection:Primitives;type:sphere;position:(0.0000, 0.0000, 0.0000);rotation:(0.0000, 0.0000, 0.0000);scale:(1.0000, 1.0000, 1.0000);group:;locked:False;hidden:False;materials:dark;]

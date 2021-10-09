@@ -1,0 +1,520 @@
+[gd_scene load_steps=36 format=2]
+
+[ext_resource path="res://assets/city1.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/water_material.material" type="Material" id=2]
+[ext_resource path="res://code/Game.cs" type="Script" id=3]
+[ext_resource path="res://prefabs/Heli.tscn" type="PackedScene" id=4]
+[ext_resource path="res://code/CongratulationsScreen.cs" type="Script" id=5]
+[ext_resource path="res://code/GameOverScreen.cs" type="Script" id=6]
+[ext_resource path="res://assets/water_normal_2.png" type="Texture" id=7]
+[ext_resource path="res://prefabs/Mine.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/hemisphere_1_4th.glb" type="PackedScene" id=9]
+[ext_resource path="res://assets/dome_shader.tres" type="Shader" id=10]
+[ext_resource path="res://code/Dome.cs" type="Script" id=11]
+[ext_resource path="res://code/MainCamera.cs" type="Script" id=12]
+[ext_resource path="res://code/WaveIntroduceScreen.cs" type="Script" id=13]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 1, 1, 1, 1 )
+sky_curve = 0.0195873
+ground_bottom_color = Color( 0.129412, 0.305882, 0.486275, 1 )
+ground_horizon_color = Color( 0.501961, 0.803922, 0.94902, 1 )
+ground_energy = 2.75
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.592157, 0.729412, 0.752941, 1 )
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_sky_contribution = 0.9
+fog_enabled = true
+fog_color = Color( 1, 1, 1, 1 )
+fog_depth_curve = 1.07177
+glow_intensity = 1.29
+glow_strength = 1.56
+
+[sub_resource type="SpatialMaterial" id=22]
+params_specular_mode = 2
+albedo_color = Color( 0.0352941, 0.113725, 0.321569, 1 )
+normal_enabled = true
+normal_scale = 0.22
+normal_texture = ExtResource( 7 )
+uv1_scale = Vector3( 60, 60, 1 )
+
+[sub_resource type="PlaneMesh" id=21]
+material = SubResource( 22 )
+size = Vector2( 80, 80 )
+
+[sub_resource type="PlaneMesh" id=3]
+resource_local_to_scene = true
+material = ExtResource( 2 )
+size = Vector2( 80, 80 )
+subdivide_width = 80
+subdivide_depth = 80
+
+[sub_resource type="Animation" id=20]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:mesh:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1.03526 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:mesh:material:uv1_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1.03526 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -1, 0, 0 ) ]
+}
+
+[sub_resource type="CylinderMesh" id=5]
+top_radius = 6.0
+bottom_radius = 6.0
+height = 0.4
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.196078, 0.196078, 0.196078, 1 )
+metallic = 0.33
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 10 )
+shader_param/dissolve_level = 0.0
+shader_param/dissolve = true
+
+[sub_resource type="SpatialMaterial" id=8]
+flags_transparent = true
+params_diffuse_mode = 4
+
+[sub_resource type="SphereMesh" id=9]
+material = SubResource( 8 )
+radius = 6.0
+height = 6.0
+is_hemisphere = true
+
+[sub_resource type="CylinderShape" id=10]
+radius = 5.8
+height = 6.0
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = ExtResource( 10 )
+shader_param/dissolve_level = null
+shader_param/dissolve = true
+
+[sub_resource type="Animation" id=12]
+resource_name = "city_slowWobble"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 1, 1.5, 2, 2.5, 3.3, 4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -1, 2 ), Vector3( 5, 1, 0 ), Vector3( 0, 0, 0 ), Vector3( 1, 0.596, 2.02 ), Vector3( 2, 0.508, 1.722 ), Vector3( -2.584, -0.517, 1.752 ), Vector3( 3.007, -1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "sink"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.4, 3.8, 6 ),
+"transitions": PoolRealArray( 4.2871, 1.31951, 2, 1.02212 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -2, 0 ), Vector3( 0, -4, 0 ), Vector3( 0, -5.718, 0 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=14]
+
+[sub_resource type="StyleBoxFlat" id=15]
+bg_color = Color( 0.619608, 0.619608, 0.619608, 0.443137 )
+border_color = Color( 0.105882, 0.0431373, 0.0431373, 1 )
+
+[sub_resource type="DynamicFontData" id=16]
+font_path = "res://assets/OpenSans-ExtraBold.ttf"
+
+[sub_resource type="DynamicFont" id=17]
+size = 48
+font_data = SubResource( 16 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=19]
+bg_color = Color( 0.517647, 0.0117647, 0.0117647, 0.443137 )
+border_color = Color( 0.105882, 0.0431373, 0.0431373, 1 )
+
+[node name="Game" type="Node"]
+script = ExtResource( 3 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight movables" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.482717, 0.875776, 0, -0.875776, 0.482717, 0, 11.0545, 0 )
+layers = 0
+light_energy = 1.3
+light_cull_mask = 4293918737
+shadow_enabled = true
+shadow_reverse_cull_face = true
+directional_shadow_max_distance = 132.1
+
+[node name="#CameraOffset" type="Spatial" parent="."]
+
+[node name="#Camera" type="Camera" parent="#CameraOffset"]
+transform = Transform( 0.298807, 0.613421, -0.731046, 0, 0.766044, 0.642788, 0.954314, -0.19207, 0.228899, -11.943, 9.227, 4.295 )
+current = true
+size = 0.1
+script = ExtResource( 12 )
+
+[node name="shakeTween" type="Tween" parent="#CameraOffset/#Camera"]
+
+[node name="shakeTimer" type="Timer" parent="#CameraOffset/#Camera"]
+
+[node name="player" parent="." instance=ExtResource( 4 )]
+
+[node name="water_new" type="Spatial" parent="."]
+transform = Transform( 12.652, 0, 0, 0, 1, 0, 0, 0, 17.372, 0, 0, 0 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="water_new"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115, -0.144, 0.401 )
+mesh = SubResource( 21 )
+material/0 = null
+
+[node name="water_copy" type="Spatial" parent="."]
+transform = Transform( 12.6522, 0, 0, 0, 1, 0, 0, 0, 17.3722, 0, 0, 0 )
+visible = false
+
+[node name="water_mesh" type="MeshInstance" parent="water_copy"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115061, -0.143814, 0.401044 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 3 )
+software_skinning_transform_normals = false
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="water_copy/water_mesh"]
+playback_speed = 0.2
+method_call_mode = 1
+anims/uv_water = SubResource( 20 )
+
+[node name="water" type="Spatial" parent="."]
+transform = Transform( 3.557, 0, 0, 0, 1, 0, 0, 0, 4.168, 0, 0, 0 )
+
+[node name="water_mesh" type="MeshInstance" parent="water"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115061, -0.143814, 0.401044 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="water/water_mesh"]
+autoplay = "uv_water"
+playback_speed = 0.2
+method_call_mode = 1
+anims/uv_water = SubResource( 4 )
+
+[node name="OmniLight - city shadows" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53723, 5.59497, -0.253777 )
+visible = false
+layers = 16
+light_energy = 2.19
+light_indirect_energy = 0.0
+light_cull_mask = 4293918736
+shadow_enabled = true
+omni_range = 10.9
+omni_shadow_detail = 0
+
+[node name="mines" type="Node" parent="."]
+
+[node name="mine1" parent="mines" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.51149, 0, -4.3859 )
+
+[node name="mine2" parent="mines" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.48903, 0, 0 )
+
+[node name="mine3" parent="mines" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.80525, 0, -4.97117 )
+
+[node name="mine4" parent="mines" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.48968, 0, 10.9604 )
+
+[node name="mine" parent="mines" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.73915, 0, 1.41812 )
+
+[node name="#city_with_dome" type="Spatial" parent="."]
+
+[node name="city" type="Spatial" parent="#city_with_dome"]
+
+[node name="city1 - mesh" parent="#city_with_dome/city" instance=ExtResource( 1 )]
+
+[node name="mergedBlocks(Clone)" parent="#city_with_dome/city/city1 - mesh" index="0"]
+layers = 16
+
+[node name="plane" type="MeshInstance" parent="#city_with_dome/city"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.139, 0 )
+layers = 16
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="#dome" type="KinematicBody" parent="#city_with_dome"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 11 )
+
+[node name="mesh" type="MeshInstance" parent="#city_with_dome/#dome"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0 )
+layers = 2
+material_override = SubResource( 7 )
+cast_shadow = 0
+generate_lightmap = false
+mesh = SubResource( 9 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="#city_with_dome/#dome"]
+shape = SubResource( 10 )
+
+[node name="hemisphere_1" parent="#city_with_dome/#dome" instance=ExtResource( 9 )]
+transform = Transform( 6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0 )
+visible = false
+
+[node name="Icosphere" parent="#city_with_dome/#dome/hemisphere_1" index="1"]
+layers = 4
+material_override = SubResource( 11 )
+cast_shadow = 0
+
+[node name="Area" type="Area" parent="#city_with_dome/#dome"]
+collision_layer = 32
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="#city_with_dome/#dome/Area"]
+shape = SubResource( 10 )
+
+[node name="slowWobble" type="AnimationPlayer" parent="#city_with_dome"]
+autoplay = "city_slowWobble"
+playback_speed = 0.2
+anims/city_slowWobble = SubResource( 12 )
+
+[node name="sink" type="AnimationPlayer" parent="#city_with_dome"]
+playback_speed = 0.3
+anims/sink = SubResource( 13 )
+
+[node name="UIs" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="#WaveIntroduceScreen" type="Panel" parent="UIs"]
+material = SubResource( 14 )
+margin_right = 1600.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 15 )
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UIs/#WaveIntroduceScreen"]
+anchor_left = 0.541
+anchor_top = 0.432
+anchor_right = 0.922
+anchor_bottom = 0.843
+margin_left = -781.6
+margin_top = -167.8
+margin_right = -565.2
+margin_bottom = -101.7
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 17 )
+text = "Wave X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="disappearTimer" type="Timer" parent="UIs/#WaveIntroduceScreen"]
+wait_time = 2.5
+one_shot = true
+
+[node name="Tween" type="Tween" parent="UIs/#WaveIntroduceScreen"]
+
+[node name="BlackStripes" type="Control" parent="UIs/#WaveIntroduceScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomPanel" type="Panel" parent="UIs/#WaveIntroduceScreen/BlackStripes"]
+margin_right = 1600.0
+margin_bottom = 110.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanel" type="Panel" parent="UIs/#WaveIntroduceScreen/BlackStripes"]
+margin_top = 790.0
+margin_right = 1600.0
+margin_bottom = 900.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="#CongratulationsScreen" type="Panel" parent="UIs"]
+visible = false
+material = SubResource( 14 )
+margin_right = 1600.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 19 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UIs/#CongratulationsScreen"]
+anchor_left = 0.541
+anchor_top = 0.432
+anchor_right = 0.922
+anchor_bottom = 0.843
+margin_left = -781.6
+margin_top = -167.8
+margin_right = -565.2
+margin_bottom = -101.7
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 17 )
+text = "- What a week, huh?
+- Captain, it's Wednesday."
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UIs/#CongratulationsScreen"]
+
+[node name="BlackStripes" type="Control" parent="UIs/#CongratulationsScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomPanel" type="Panel" parent="UIs/#CongratulationsScreen/BlackStripes"]
+margin_right = 1600.0
+margin_bottom = 110.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanel" type="Panel" parent="UIs/#CongratulationsScreen/BlackStripes"]
+margin_top = 790.0
+margin_right = 1600.0
+margin_bottom = 900.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="#GameOverScreen" type="Panel" parent="UIs"]
+visible = false
+material = SubResource( 14 )
+margin_right = 1600.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 19 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UIs/#GameOverScreen"]
+anchor_left = 0.541
+anchor_top = 0.432
+anchor_right = 0.922
+anchor_bottom = 0.843
+margin_left = -781.6
+margin_top = -167.8
+margin_right = -565.2
+margin_bottom = -101.7
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 17 )
+text = "You fought well (probably).
+But the city has fallen."
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="UIs/#GameOverScreen"]
+
+[node name="BlackStripes" type="Control" parent="UIs/#GameOverScreen"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomPanel" type="Panel" parent="UIs/#GameOverScreen/BlackStripes"]
+margin_right = 1600.0
+margin_bottom = 110.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopPanel" type="Panel" parent="UIs/#GameOverScreen/BlackStripes"]
+margin_top = 790.0
+margin_right = 1600.0
+margin_bottom = 900.0
+custom_styles/panel = SubResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="_preloadedPrefabs" type="Spatial" parent="."]
+visible = false
+
+[node name="bullet" parent="_preloadedPrefabs" instance_placeholder="res://prefabs/Bullet.tscn"]
+
+[node name="mine" parent="_preloadedPrefabs" instance_placeholder="res://prefabs/Mine.tscn"]
+
+[connection signal="timeout" from="UIs/#WaveIntroduceScreen/disappearTimer" to="UIs/#WaveIntroduceScreen" method="_on_disappearTimer_timeout"]
+
+[editable path="#city_with_dome/city/city1 - mesh"]
+[editable path="#city_with_dome/#dome/hemisphere_1"]

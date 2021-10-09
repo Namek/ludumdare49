@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://code/Heli.cs" type="Script" id=1]
+[ext_resource path="res://code/CameraFollow.cs" type="Script" id=2]
+[ext_resource path="res://assets/heli_body.glb" type="PackedScene" id=3]
+[ext_resource path="res://assets/heli_propeller.glb" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/Bullet.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CylinderShape" id=1]
+radius = 1.1
+height = 2.4
+
+[sub_resource type="Animation" id=2]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 359.9, 0 ) ]
+}
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.5, 2, 1 )
+
+[sub_resource type="CylinderMesh" id=4]
+top_radius = 0.02
+bottom_radius = 0.01
+radial_segments = 4
+rings = 3
+
+[node name="player" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.619, 1.747, 0 )
+collision_layer = 8
+collision_mask = 32
+script = ExtResource( 1 )
+SpawnBullets = true
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )
+
+[node name="Camera" type="ClippedCamera" parent="."]
+transform = Transform( -4.26776e-08, 0.793205, -0.608955, 9.45045e-09, 0.608955, 0.793205, 1, 2.80972e-08, -3.34849e-08, -0.945976, 1.01096, 0 )
+fov = 85.0
+script = ExtResource( 2 )
+Distance = 1000.0
+Height = 3.0
+
+[node name="camera_target" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16628, 0 )
+
+[node name="mesh" type="Spatial" parent="."]
+transform = Transform( 0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0 )
+
+[node name="heli_body" parent="mesh" instance=ExtResource( 3 )]
+
+[node name="heli_propeller" parent="mesh" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.689 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="mesh/heli_propeller"]
+autoplay = "propeller_rotation"
+playback_speed = 3.0
+anims/propeller_rotation = SubResource( 2 )
+
+[node name="mineDetectionArea" type="Area" parent="."]
+monitorable = false
+collision_layer = 8
+collision_mask = 16
+
+[node name="CollisionShape" type="CollisionShape" parent="mineDetectionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.043, -1.126 )
+shape = SubResource( 3 )
+
+[node name="laser" type="Spatial" parent="."]
+
+[node name="mesh" type="MeshInstance" parent="laser"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.256, -0.52 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="bulletOrigins" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0422843, 0 )
+
+[node name="leftOuter" type="Spatial" parent="bulletOrigins"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.585456, 0, 0 )
+
+[node name="leftInner" type="Spatial" parent="bulletOrigins"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.344104, 0, -0.0518172 )
+
+[node name="rightOuter" type="Spatial" parent="bulletOrigins"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.586336, 0, 0 )
+
+[node name="rightInner" type="Spatial" parent="bulletOrigins"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.332021, 0, -0.0541869 )
+
+[node name="bullet" parent="bulletOrigins" instance=ExtResource( 5 )]
+
+[node name="markingPoints" type="Spatial" parent="."]
+
+[node name="front" type="Spatial" parent="markingPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.596269 )
+
+[node name="back" type="Spatial" parent="markingPoints"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.477498 )
+
+[connection signal="body_entered" from="mineDetectionArea" to="." method="_on_Area_body_entered"]
+[connection signal="body_exited" from="mineDetectionArea" to="." method="_on_Area_body_exited"]

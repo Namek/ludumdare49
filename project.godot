@@ -1,0 +1,147 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "VFSM",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "VFSMDemoSimpleAIJumper",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/demos/simple_ai_character/vfsm_simple_ai_jumpter.gd"
+}, {
+"base": "Node2D",
+"class": "VFSMDemoTrafficLightsController",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/demos/simple_traffic_lights/traffic_lights.gd"
+}, {
+"base": "Node",
+"class": "VFSMSingleton",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/vfsm_singleton.gd"
+}, {
+"base": "Resource",
+"class": "VFSMState",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm_state.gd"
+}, {
+"base": "Object",
+"class": "VFSMStateBase",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/resources/vfsm_state_base.gd"
+}, {
+"base": "GraphNode",
+"class": "VFSMStateNode",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/editor/vfsm_state_graph_node.gd"
+}, {
+"base": "Resource",
+"class": "VFSMTrigger",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm_trigger.gd"
+}, {
+"base": "VFSMTrigger",
+"class": "VFSMTriggerAction",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm_trigger_action.gd"
+}, {
+"base": "Object",
+"class": "VFSMTriggerBase",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/resources/vfsm_trigger_base.gd"
+}, {
+"base": "PanelContainer",
+"class": "VFSMTriggerGraphSlot",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/editor/vfsm_trigger_graph_slot.gd"
+}, {
+"base": "VFSMTrigger",
+"class": "VFSMTriggerScript",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm_trigger_script.gd"
+}, {
+"base": "VFSMTrigger",
+"class": "VFSMTriggerTimer",
+"language": "GDScript",
+"path": "res://addons/visual_fsm/fsm/vfsm_trigger_timer.gd"
+} ]
+_global_script_class_icons={
+"VFSM": "",
+"VFSMDemoSimpleAIJumper": "",
+"VFSMDemoTrafficLightsController": "",
+"VFSMSingleton": "",
+"VFSMState": "",
+"VFSMStateBase": "",
+"VFSMStateNode": "",
+"VFSMTrigger": "",
+"VFSMTriggerAction": "",
+"VFSMTriggerBase": "",
+"VFSMTriggerGraphSlot": "",
+"VFSMTriggerScript": "",
+"VFSMTriggerTimer": ""
+}
+
+[application]
+
+config/name="ludumdare49"
+run/main_scene="res://World.tscn"
+
+[autoload]
+
+Globals="*res://code/Globals.cs"
+
+[display]
+
+window/size/width=1600
+window/size/height=900
+window/size/resizable=false
+window/size/always_on_top=true
+window/dpi/allow_hidpi=true
+
+[input]
+
+game_bottom_attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+game_front_attack={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":2,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+3d_render/layer_1="movables"
+3d_render/layer_3="dome"
+3d_physics/layer_4="heli"
+3d_render/layer_5="city"
+3d_physics/layer_5="mines"
+3d_physics/layer_6="dome"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+quality/shadow_atlas/size=8192
+quality/shadows/filter_mode=2
+quality/filters/msaa=2
+environment/default_environment="res://default_env.tres"
